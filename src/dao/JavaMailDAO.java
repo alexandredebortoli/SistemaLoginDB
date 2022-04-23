@@ -9,7 +9,7 @@ import javax.activation.*;
 
 public class JavaMailDAO {
     
-    public static void enviarEmail(String recipient, int perfil, int id, String senha) throws Exception {
+    public static void enviarEmail(String recipient, String senha) throws Exception {
         System.out.println("Preparando para enviar email...");
         Properties properties = new Properties();
         
@@ -27,10 +27,8 @@ public class JavaMailDAO {
                 return new PasswordAuthentication(myAccount, myPass);
             }
         });
-        //String senha = acharSenha(perfil, recipient);
         if(senha != null) {
-            //int id = acharId(perfil, recipient);
-            Message message = prepareMessage(session, myAccount, recipient, senha, id);
+            Message message = prepareMessage(session, myAccount, recipient, senha);
             Transport.send(message);
             System.out.println("Mensagem enviada com sucesso");
         } else {
@@ -38,41 +36,19 @@ public class JavaMailDAO {
         }
     }
     
-    private static Message prepareMessage(Session session, String myAccount, String recipient, String senha, int id) {
+    private static Message prepareMessage(Session session, String myAccount, String recipient, String senha) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccount));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             message.setSubject("Recuperação de conta");
-            message.setText("Seu ID: " + id + "\nSua senha: " + senha);
-            
-            
-            
+            message.setText("Sua nova senha: " + senha);
+   
             return message;
-        } catch (Exception ex) {
+        } catch (MessagingException ex) {
             System.out.println("Error ao enviar mensagem");
             Logger.getLogger(JavaMailDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
-    
-    /*private static String acharSenha(int perfil, String recipiente) {
-        if(perfil == 1) {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            for(int i = 0; i < usuarioDAO.listar(0).size(); i++) {
-                if(recipiente.equals(usuarioDAO.listar(0).get(i).getEmail())) {
-                    return usuarioDAO.listar(0).get(i).getSenha();
-                }
-            }
-        } else {
-            AdministradorDAO administradorDAO = new AdministradorDAO();
-            for(int i = 0; i < administradorDAO.listar(0).size(); i++) {
-                if(recipiente.equals(administradorDAO.listar(0).get(i).getEmail())) {
-                    return administradorDAO.listar(0).get(i).getSenha();
-                }
-            }
-        }
-        return null;
-    }*/
-
 }

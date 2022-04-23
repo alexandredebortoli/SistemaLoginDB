@@ -4,7 +4,6 @@ import conexao.ConexaoDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
@@ -25,8 +24,6 @@ public class UsuarioDAO {
             preparedStatement.setString(4, usuario.getDataNascimento());
             preparedStatement.setString(5, usuario.getCargo());
             preparedStatement.setInt(6, usuario.getStatus());
-
-            
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -95,59 +92,34 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public void atualizar(int id) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("1. Nome\n2. Email\n3. Senha\n4. Data de Nascimento\n5. Cargo\n6. Tudo");
-        System.out.print("Alterar: ");
+    public void atualizar(Usuario usuario, int opcao) {
         String QUERY = "";
         do {
-            Usuario usuario = new Usuario();
-            switch (Integer.parseInt(scan.nextLine())) {
+            switch (opcao) {
                 case 1 -> {
-                    System.out.print("Novo nome: ");
-                    usuario.setNome(scan.nextLine());
-                    QUERY = "UPDATE usuario SET nome = '" + usuario.getNome() + "' WHERE id = " + id;
+                    QUERY = "UPDATE usuario SET nome = '" + usuario.getNome() + "' WHERE id = " + usuario.getId();
                 }
                 case 2 -> {
-                    System.out.print("Novo Email: ");
-                    usuario.setEmail(scan.nextLine());
-                    QUERY = "UPDATE usuario SET email = '" + usuario.getEmail() + "' WHERE id = " + id;
+                    QUERY = "UPDATE usuario SET email = '" + usuario.getEmail() + "' WHERE id = " + usuario.getId();
                 }
                 case 3 -> {
-                    System.out.print("Nova Senha: ");
-                    usuario.setSenha(criptografia.Criptografar.encriptografar(scan.nextLine()));
-                    QUERY = "UPDATE usuario SET senha = '" + usuario.getSenha() + "' WHERE id = " + id;
+                    QUERY = "UPDATE usuario SET senha = '" + usuario.getSenha() + "' WHERE id = " + usuario.getId();
                 }
                 case 4 -> {
-                    System.out.print("Nova Data de Nascimento: ");
-                    usuario.setDataNascimento(scan.nextLine());
-                    QUERY = "UPDATE usuario SET dataNascimento = '" + usuario.getDataNascimento() + "' WHERE id = " + id;
+                    QUERY = "UPDATE usuario SET dataNascimento = '" + usuario.getDataNascimento() + "' WHERE id = " + usuario.getId();
                 }
                 case 5 -> {
-                    System.out.print("Novo Cargo: ");
-                    usuario.setCargo(scan.nextLine());
-                    QUERY = "UPDATE usuario SET cargo = '" + usuario.getCargo() + "' WHERE id = " + id;
+                    QUERY = "UPDATE usuario SET cargo = '" + usuario.getCargo() + "' WHERE id = " + usuario.getId();
                 }
                 case 6 -> {
-                    System.out.print("Novo nome: ");
-                    usuario.setNome(scan.nextLine());
-                    System.out.print("Novo email: ");
-                    usuario.setEmail(scan.nextLine());
-                    System.out.print("Nova senha: ");
-                    usuario.setSenha(criptografia.Criptografar.encriptografar(scan.nextLine()));
-                    System.out.print("Nova data de nascimento: ");
-                    usuario.setDataNascimento(scan.nextLine());
-                    System.out.print("Novo cargo: ");
-                    usuario.setCargo(scan.nextLine());
                     QUERY = "UPDATE usuario SET nome = '" + usuario.getNome()
                             + "', email = '" + usuario.getEmail()
                             + "', senha = '" + usuario.getSenha()
                             + "', dataNascimento = '" + usuario.getDataNascimento() 
                             + "', cargo = '" + usuario.getCargo()
-                            + "' WHERE id = " + id;
-                }
-                default -> System.out.println("Opcão inválida!");
-            }
+                            + "' WHERE id = " + usuario.getId();
+                } default -> {}
+            } 
         } while(QUERY.equals(""));
 
         Connection connection = null;
@@ -155,8 +127,6 @@ public class UsuarioDAO {
             connection = ConexaoDB.createConnectionMySQL();
             Statement statement = connection.createStatement();
             statement.executeUpdate(QUERY);
-
-            System.out.println("Atualizado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -172,26 +142,11 @@ public class UsuarioDAO {
 
     public void status(int id, int status) {
         String QUERY = "UPDATE usuario SET status = " + status + " WHERE id = " + id;
-        if(status == 1) {
-            System.out.println("Ativando...");
-        } else if(status == 2) {
-            System.out.println("Inativando...");
-        } else {
-            System.out.println("Deletando...");
-        }
         Connection connection = null;
         try {
             connection = ConexaoDB.createConnectionMySQL();
             Statement statement = connection.createStatement();
             statement.executeUpdate(QUERY);
-
-            if(status == 1) {
-                System.out.println("\nAtivado com sucesso!");
-            } else if(status == 2) {
-                System.out.println("\nInativado com sucesso!");
-            } else {
-                System.out.println("\nDeletado com sucesso!");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -205,23 +160,13 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario verificarLogin(int id, String senha) {
-        Usuario usuario = null;
-        if(senha.equals(listar(id).get(0).getSenha())) {
-            usuario = listar(id).get(0);
-        }
-        return usuario;
-    }
-    
-    public static void atualizarSenhaUsuario(int id, String senha) {
+    /*public static void atualizarSenhaUsuario(int id, String senha) {
         String QUERY = "UPDATE usuario SET senha = '" + criptografia.Criptografar.encriptografar(senha) + "' WHERE id = " + id;
         Connection connection = null;
         try {
             connection = ConexaoDB.createConnectionMySQL();
             Statement statement = connection.createStatement();
             statement.executeUpdate(QUERY);
-
-            System.out.println("Alterado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -233,5 +178,5 @@ public class UsuarioDAO {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import conexao.ConexaoDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Administrador;
@@ -100,59 +95,34 @@ public class AdministradorDAO {
         return administradores;
     }
     
-        public void atualizar(int id) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("1. Nome\n2. Email\n3. Senha\n4. Data de Nascimento\n5. Cargo\n6. Tudo");
-        System.out.print("Alterar: ");
+    public void atualizar(Administrador admin, int opcao) {
         String QUERY = "";
         do {
-            Administrador administrador = new Administrador();
-            switch (Integer.parseInt(scan.nextLine())) {
+            switch (opcao) {
                 case 1 -> {
-                    System.out.print("Novo nome: ");
-                    administrador.setNome(scan.nextLine());
-                    QUERY = "UPDATE administrador SET nome = '" + administrador.getNome() + "' WHERE id = " + id;
+                    QUERY = "UPDATE administrador SET nome = '" + admin.getNome() + "' WHERE id = " + admin.getId();
                 }
                 case 2 -> {
-                    System.out.print("Novo Email: ");
-                    administrador.setEmail(scan.nextLine());
-                    QUERY = "UPDATE administrador SET email = '" + administrador.getEmail() + "' WHERE id = " + id;
+                    QUERY = "UPDATE administrador SET email = '" + admin.getEmail() + "' WHERE id = " + admin.getId();
                 }
                 case 3 -> {
-                    System.out.print("Nova Senha: ");
-                    administrador.setSenha(criptografia.Criptografar.encriptografar(scan.nextLine()));
-                    QUERY = "UPDATE administrador SET senha = '" + administrador.getSenha() + "' WHERE id = " + id;
+                    QUERY = "UPDATE administrador SET senha = '" + admin.getSenha() + "' WHERE id = " + admin.getId();
                 }
                 case 4 -> {
-                    System.out.print("Nova Data de Nascimento: ");
-                    administrador.setDataNascimento(scan.nextLine());
-                    QUERY = "UPDATE administrador SET dataNascimento = '" + administrador.getDataNascimento() + "' WHERE id = " + id;
+                    QUERY = "UPDATE administrador SET dataNascimento = '" + admin.getDataNascimento() + "' WHERE id = " + admin.getId();
                 }
                 case 5 -> {
-                    System.out.print("Novo Cargo: ");
-                    administrador.setCargo(scan.nextLine());
-                    QUERY = "UPDATE administrador SET cargo = '" + administrador.getCargo() + "' WHERE id = " + id;
+                    QUERY = "UPDATE administrador SET cargo = '" + admin.getCargo() + "' WHERE id = " + admin.getId();
                 }
                 case 6 -> {
-                    System.out.print("Novo nome: ");
-                    administrador.setNome(scan.nextLine());
-                    System.out.print("Novo email: ");
-                    administrador.setEmail(scan.nextLine());
-                    System.out.print("Nova senha: ");
-                    administrador.setSenha(criptografia.Criptografar.encriptografar(scan.nextLine()));
-                    System.out.print("Nova data de nascimento: ");
-                    administrador.setDataNascimento(scan.nextLine());
-                    System.out.print("Novo cargo: ");
-                    administrador.setCargo(scan.nextLine());
-                    QUERY = "UPDATE administrador SET nome = '" + administrador.getNome()
-                            + "', email = '" + administrador.getEmail()
-                            + "', senha = '" + administrador.getSenha()
-                            + "', dataNascimento = '" + administrador.getDataNascimento() 
-                            + "', cargo = '" + administrador.getCargo()
-                            + "' WHERE id = " + id;
-                }
-                default -> System.out.println("Opcão inválida!");
-            }
+                    QUERY = "UPDATE administrador SET nome = '" + admin.getNome()
+                            + "', email = '" + admin.getEmail()
+                            + "', senha = '" + admin.getSenha()
+                            + "', dataNascimento = '" + admin.getDataNascimento() 
+                            + "', cargo = '" + admin.getCargo()
+                            + "' WHERE id = " + admin.getId();
+                } default -> {}
+            } 
         } while(QUERY.equals(""));
 
         Connection connection = null;
@@ -160,8 +130,6 @@ public class AdministradorDAO {
             connection = ConexaoDB.createConnectionMySQL();
             Statement statement = connection.createStatement();
             statement.executeUpdate(QUERY);
-
-            System.out.println("Alterado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -177,26 +145,11 @@ public class AdministradorDAO {
 
     public void status(int id, int status) {
         String QUERY = "UPDATE administrador SET status = " + status + " WHERE id = " + id;
-        if(status == 1) {
-            System.out.println("Ativando...");
-        } else if(status == 2) {
-            System.out.println("Inativando...");
-        } else {
-            System.out.println("Deletando...");
-        }
         Connection connection = null;
         try {
             connection = ConexaoDB.createConnectionMySQL();
             Statement statement = connection.createStatement();
             statement.executeUpdate(QUERY);
-
-            if(status == 1) {
-                System.out.println("\nAtivado com sucesso!");
-            } else if(status == 2) {
-                System.out.println("\nInativado com sucesso!");
-            } else {
-                System.out.println("\nDeletado com sucesso!");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -218,7 +171,7 @@ public class AdministradorDAO {
         return administrador;
     }
 
-    public void atualiarSenhaAdministrador(int id, String senha) {
+    /*public void atualiarSenhaAdministrador(int id, String senha) {
         String QUERY = "UPDATE administrador SET senha = '" + criptografia.Criptografar.encriptografar(senha) + "' WHERE id = " + id;
         Connection connection = null;
         try {
@@ -238,5 +191,5 @@ public class AdministradorDAO {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

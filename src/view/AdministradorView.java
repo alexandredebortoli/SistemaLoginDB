@@ -5,40 +5,17 @@ import java.util.Scanner;
 import model.Administrador;
 
 public class AdministradorView {
-    public static void exibir(AdministradorDAO administradorDAO, int id) {
-        if(id == 0){
-            dao.UsuarioDAO usuarioDAO = new dao.UsuarioDAO();
-            System.out.println("- Usuários");
-            UsuarioView.exibir(usuarioDAO, 0);
-            System.out.println("- Administradores");
-        }
-        for(Administrador a : administradorDAO.listar(id)) {          
-            System.out.print("Id: " + a.getId());
-            System.out.print(", Usuário: " + a.getNome());
-            System.out.print(", Email: " + a.getEmail());
-            System.out.print(", Data de Nascimento: " + a.getDataNascimento());
-            System.out.print(", Cargo: " + a.getCargo());
-            if(a.getStatus() == 1) {
-                System.out.println(", Status: ativo");
-            } else if(a.getStatus() == 2) {
-                System.out.println(", Status: inativo");
-            }               
-        }
-    }
-    public static Administrador loginAdministrador(AdministradorDAO administradorDAO) {
-        int id;
-        String senha;
+    
+    /*public static Administrador loginAdministrador(Administrador administrador) {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n- Login Administrador -");
-        System.out.print("Id: "); 
-        id = Integer.parseInt(scan.nextLine());
+        System.out.print("Id: ");
+        administrador.setId(Integer.parseInt(scan.nextLine()));
         System.out.print("Senha: ");
-        senha= criptografia.Criptografar.encriptografar(scan.nextLine());
-        
-        return administradorDAO.verificarLogin(id, senha);
-        
+        administrador.setSenha(scan.nextLine());
+        return administrador;
     }
-    public static void menuAdministrador(AdministradorDAO administradorDAO, Administrador administrador) {
+    public static void menuAdministrador() {
         int opcao;
         Scanner scan = new Scanner(System.in);
         do {
@@ -105,5 +82,55 @@ public class AdministradorView {
         administradorDAO.adicionar(administrador);
         System.out.println("Cadastrado com sucesso!");
         System.out.println("Seu ID é " + SistemaView.acharId(2, administrador.getEmail()));
-    }   
+    } */  
+    public static int atualizarAdminOuUser() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("1. Atualizar um usuário");
+        System.out.println("2. Atualizar um administrador");
+        System.out.println("Escolha: ");
+        return Integer.parseInt(scan.nextLine());
+    }
+    public static int atualizarAdministrador() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("- Atualizar Administrador -");
+        System.out.println("1. Nome\n2. Email\n3. Senha\n4. Data de Nascimento\n5. Cargo\n6. Tudo");
+        System.out.print("Alterar: ");
+        return Integer.parseInt(scan.nextLine());
+    }
+    
+    public static Administrador loginAdministrador(Administrador admin) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n- Login Administrador -");
+        System.out.print("Id: ");
+        admin.setId(Integer.parseInt(scan.nextLine()));
+        System.out.print("Senha: ");
+        admin.setSenha(scan.nextLine());
+        return admin;
+    }
+    public static int menuAdministrador() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n- Menu Administrador -");           
+        System.out.println("0. Deslogar\n1. Visualizar informações pessoais\n2. Alterar informações");
+        System.out.println("\n3. Visualizar informações de todos\n4. Cadastrar outro administrador");
+        System.out.print("Escolha: ");
+        return Integer.parseInt(scan.nextLine());
+        
+    }
+    
+    public static void cadastrarAdministrador() {
+        System.out.println("- Cadastrar Administrador -");
+    }
+    
+    public static void exibirAdministrador(Administrador admin) {
+        System.out.print("Id: " + admin.getId());
+        System.out.print(", Usuário: " + admin.getNome());
+        System.out.print(", Email: " + admin.getEmail());
+        System.out.print(", Data de Nascimento: " + admin.getDataNascimento());
+        System.out.print(", Cargo: " + admin.getCargo());
+        if(admin.getStatus() == 1) {
+            System.out.println(", Status: ativo");
+        } else if(admin.getStatus() == 2) {
+            System.out.println(", Status: inativo");
+        }
+    }
 }
