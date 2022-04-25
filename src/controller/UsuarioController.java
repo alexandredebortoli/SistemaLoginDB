@@ -3,60 +3,50 @@ package controller;
 import dao.JavaMailDAO;
 import model.Usuario;
 import dao.UsuarioDAO;
-import view.SistemaView;
-import view.UsuarioView;
+import frame.CadastrarFrame;
+import frame.TableUsuarios;
+import frame.UsuarioFrame;
+import java.util.List;
 
 public class UsuarioController {
-    
-    public static void loginUsuario() {
+    public static void usuarioFrame() {
+        UsuarioFrame usuarioFrame = new UsuarioFrame();
+        usuarioFrame.show(true);
+    }
+    public static void cadastrarFrame() {
+        CadastrarFrame cadastrarFrame = new CadastrarFrame();
+        cadastrarFrame.show(true);
+    }
+    public static Usuario verificarLogin(int id, String senha) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = new Usuario();
-        usuario = UsuarioView.loginUsuario(usuario);
-        usuario.setSenha(SistemaController.encriptografar(usuario.getSenha()));
+        usuario.setId(id);
+        usuario.setSenha(SistemaController.encriptografar(senha));
         
         if(usuario.getSenha().equals(usuarioDAO.listar(usuario.getId()).get(0).getSenha())) {
             usuario = usuarioDAO.listar(usuario.getId()).get(0);
-            SistemaView.msgLogin(true, usuario.getNome());
-            menuUsuario(usuario, usuarioDAO);
-        } else {
-            SistemaView.msgLogin(false, "");
+            return usuario;
+        }  else {
+            usuario = null;
+            return usuario;
         }
     }
-    public static void menuUsuario(Usuario usuario, UsuarioDAO usuarioDAO) {
-        int opcao = 0;
-        do {
-            opcao = UsuarioView.menuUsuario();
-            switch (opcao) {
-                case 0 -> SistemaView.msgDeslogar();
-                case 1 -> {
-                    UsuarioView.exibirUsuario(usuario);
-                }
-                case 2 -> {
-                    usuario = atualizarUsuario(usuario, usuarioDAO);
-                }
-                default -> SistemaView.msgOpcaoInvalida();
-            }
-        } while (opcao != 0);
-    }
-    
-    public static void cadastrarUsuario() {
+
+    public static void cadastrar(String nome, String email, String senha, String dataNascimento, String cargo) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = new Usuario();
-        UsuarioView.cadastrarUsuario();
-        usuario.setNome(SistemaView.cadastrarNome());
-        usuario.setEmail(SistemaView.cadastrarEmail());
-        usuario.setSenha(SistemaController.encriptografar(SistemaView.cadastrarSenha()));
-        usuario.setDataNascimento(SistemaView.cadastrarDataNascimento());
-        usuario.setCargo(SistemaView.cadastrarCargo());
-        
+        usuario.setNome(nome);
+        usuario.setEmail(email);
+        usuario.setSenha(SistemaController.encriptografar(senha));
+        usuario.setDataNascimento(dataNascimento);
+        usuario.setCargo(cargo);
         usuarioDAO.adicionar(usuario);
-        SistemaView.msgCadastroSucesso(usuarioDAO.listar(0).get(usuarioDAO.listar(0).size()).getId());
     }
-    
-    public static void recuperarSenhaUsuario() {
+
+    public static void recuperarSenha(int id) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = new Usuario();
-        usuario.setId(SistemaView.pegarId());
+        usuario.setId(id);
         try {
             usuario = usuarioDAO.listar(usuario.getId()).get(0);
             usuario.setSenha(SistemaController.gerarNovaSenha());
@@ -68,42 +58,37 @@ public class UsuarioController {
             e.printStackTrace();
         }
     }
-    
-    public static Usuario atualizarUsuario(Usuario usuario, UsuarioDAO usuarioDAO) {
-        int escolha = UsuarioView.atualizarUsuario();
-        switch (escolha) {
-            case 1:
-                usuario.setNome(SistemaView.atualizarNome());
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            case 2:
-                usuario.setEmail(SistemaView.atualizarEmail());
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            case 3:
-                usuario.setSenha(SistemaController.encriptografar(SistemaView.atualizarSenha()));
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            case 4:
-                usuario.setDataNascimento(SistemaView.atualizarDataNascimento());
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            case 5:
-                usuario.setCargo(SistemaView.atualizarCargo());
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            case 6:
-                usuario.setNome(SistemaView.atualizarNome());
-                usuario.setEmail(SistemaView.atualizarEmail());
-                usuario.setSenha(SistemaController.encriptografar(SistemaView.atualizarSenha()));
-                usuario.setDataNascimento(SistemaView.atualizarDataNascimento());
-                usuario.setCargo(SistemaView.atualizarCargo());
-                usuarioDAO.atualizar(usuario, escolha);
-                break;
-            default:
-                SistemaView.msgOpcaoInvalida();
-                break;
+    public static void atualizar(int id, String nome, String email, String senha, String dataNascimento, String cargo) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario novoUsuario = new Usuario();
+        novoUsuario = usuarioDAO.listar(id).get(0);
+        if(!nome.equals("")) {
+            novoUsuario.setNome(nome);
         }
-        return usuario;
+        if(!email.equals("")) {
+            novoUsuario.setEmail(email);
+        }
+        if(!senha.equals("")) {
+            novoUsuario.setSenha(SistemaController.encriptografar(senha));
+        }
+        if(!dataNascimento.equals("dd/mm/aaaa")) {
+            novoUsuario.setDataNascimento(dataNascimento);
+        }
+        if(!cargo.equals("")) {
+            novoUsuario.setCargo(cargo);
+        }
+        usuarioDAO.atualizar(novoUsuario, 6);
+    }
+    public static void tableUsuariosFrame() {
+        TableUsuarios tableUsuarios = new TableUsuarios();
+        tableUsuarios.show(true);
+    }
+    public static List<Usuario> listaUsuarios() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.listar(0);
+    }
+    public static Usuario infoPessoais(int id) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.listar(id).get(0);
     }
 }
