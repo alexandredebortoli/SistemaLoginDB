@@ -7,6 +7,8 @@ package frame;
 import controller.AdministradorController;
 import controller.UsuarioController;
 import javax.swing.JOptionPane;
+import model.Administrador;
+import model.Usuario;
 
 /**
  *
@@ -32,7 +34,7 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tId = new javax.swing.JTextField();
+        tCpf = new javax.swing.JTextField();
         bRecuperarSenha = new javax.swing.JButton();
         bFechar = new javax.swing.JButton();
         cbUsuario = new javax.swing.JCheckBox();
@@ -44,9 +46,9 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
         jLabel1.setText("Recuperação de Senha");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("ID:");
+        jLabel2.setText("CPF:");
 
-        tId.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tCpf.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
 
         bRecuperarSenha.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         bRecuperarSenha.setText("Recuperar Senha");
@@ -90,7 +92,7 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bRecuperarSenha)
-                            .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,7 +109,7 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(bRecuperarSenha)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -123,15 +125,26 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
 
     private void bRecuperarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRecuperarSenhaActionPerformed
         // TODO add your handling code here:
-        if(!tId.getText().equals("")) {
-            if(cbUsuario.isSelected() && !cbAdmin.isSelected()) {
-                UsuarioController.recuperarSenha(Integer.parseInt(tId.getText()));
-                JOptionPane.showMessageDialog(this, "Um email com sua nova senha foi enviado para você!");
-                dispose();
-            } else if(!cbUsuario.isSelected() && cbAdmin.isSelected()) {
-                AdministradorController.recuperarSenha(Integer.parseInt(tId.getText()));
-                JOptionPane.showMessageDialog(this, "Um email com sua nova senha foi enviado para você!");
-                dispose();
+        if(!tCpf.getText().equals("")) {
+            if(cbUsuario.isSelected() && !cbAdmin.isSelected()) { //Usuario
+                Usuario novoUsuario = UsuarioController.verificarCpf(tCpf.getText());
+                if(novoUsuario != null) {
+                    UsuarioController.recuperarSenha(novoUsuario);
+                    JOptionPane.showMessageDialog(this, "Um email com sua nova senha foi enviado para você!");
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "CPF inválido!");
+                }
+                
+            } else if(!cbUsuario.isSelected() && cbAdmin.isSelected()) { //Admin
+                Administrador novoAdmin = AdministradorController.verificarCpf(tCpf.getText());
+                if(novoAdmin != null) {
+                    AdministradorController.recuperarSenha(novoAdmin);
+                    JOptionPane.showMessageDialog(this, "Um email com sua nova senha foi enviado para você!");
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "CPF inválido!");
+                }
             } else if(!cbUsuario.isSelected() && !cbAdmin.isSelected()) {
                 JOptionPane.showMessageDialog(this, "Selecione um perfil!");
             } else if(cbUsuario.isSelected() && cbAdmin.isSelected()) {
@@ -184,6 +197,6 @@ public class RecuperarSenhaFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField tId;
+    private javax.swing.JTextField tCpf;
     // End of variables declaration//GEN-END:variables
 }

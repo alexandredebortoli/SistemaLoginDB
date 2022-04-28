@@ -10,8 +10,8 @@ import model.Administrador;
 
 public class AdministradorDAO {
     public void adicionar(Administrador administrador) {
-        String QUERY = "INSERT INTO administrador (nome, email, senha, dataNascimento, cargo, status)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+        String QUERY = "INSERT INTO administrador (nome, email, senha, dataNascimento, cargo, status, cpf)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         
@@ -24,6 +24,7 @@ public class AdministradorDAO {
             preparedStatement.setString(4, administrador.getDataNascimento());
             preparedStatement.setString(5, administrador.getCargo());
             preparedStatement.setInt(6, administrador.getStatus());
+            preparedStatement.setString(7, administrador.getCpf());
 
             
 
@@ -74,6 +75,7 @@ public class AdministradorDAO {
                 administrador.setDataNascimento(resultSet.getString("dataNascimento"));
                 administrador.setCargo(resultSet.getString("cargo"));
                 administrador.setStatus(resultSet.getInt("status"));
+                administrador.setCpf(resultSet.getString("cpf"));
                 
                 administradores.add(administrador);
             }
@@ -115,11 +117,16 @@ public class AdministradorDAO {
                     QUERY = "UPDATE administrador SET cargo = '" + admin.getCargo() + "' WHERE id = " + admin.getId();
                 }
                 case 6 -> {
+                    QUERY = "UPDATE administrador SET cpf = '" + admin.getCpf() + "' WHERE id = " + admin.getId();
+                }
+                case 7 -> {
                     QUERY = "UPDATE administrador SET nome = '" + admin.getNome()
                             + "', email = '" + admin.getEmail()
                             + "', senha = '" + admin.getSenha()
                             + "', dataNascimento = '" + admin.getDataNascimento() 
                             + "', cargo = '" + admin.getCargo()
+                            + "', status = " + admin.getStatus()
+                            + ", cpf = '" + admin.getCpf()
                             + "' WHERE id = " + admin.getId();
                 } default -> {}
             } 
@@ -162,34 +169,4 @@ public class AdministradorDAO {
             }
         }
     }
-    
-    public Administrador verificarLogin(int id, String senha) {
-        Administrador administrador = null;
-        if(senha.equals(listar(id).get(0).getSenha())) {
-            administrador = listar(id).get(0);
-        }
-        return administrador;
-    }
-
-    /*public void atualiarSenhaAdministrador(int id, String senha) {
-        String QUERY = "UPDATE administrador SET senha = '" + criptografia.Criptografar.encriptografar(senha) + "' WHERE id = " + id;
-        Connection connection = null;
-        try {
-            connection = ConexaoDB.createConnectionMySQL();
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(QUERY);
-
-            System.out.println("Alterado com sucesso!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(connection != null) {
-                    connection.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }

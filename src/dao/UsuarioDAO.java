@@ -10,8 +10,8 @@ import model.Usuario;
 
 public class UsuarioDAO {
     public void adicionar(Usuario usuario) {
-        String QUERY = "INSERT INTO usuario (nome, email, senha, dataNascimento, cargo, status)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+        String QUERY = "INSERT INTO usuario (nome, email, senha, dataNascimento, cargo, status, cpf)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         
@@ -24,6 +24,7 @@ public class UsuarioDAO {
             preparedStatement.setString(4, usuario.getDataNascimento());
             preparedStatement.setString(5, usuario.getCargo());
             preparedStatement.setInt(6, usuario.getStatus());
+            preparedStatement.setString(7, usuario.getCpf());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -71,6 +72,7 @@ public class UsuarioDAO {
                 usuario.setDataNascimento(resultSet.getString("dataNascimento"));
                 usuario.setCargo(resultSet.getString("cargo"));
                 usuario.setStatus(resultSet.getInt("status"));
+                usuario.setCpf(resultSet.getString("cpf"));
                 
                 usuarios.add(usuario);
             }
@@ -112,11 +114,16 @@ public class UsuarioDAO {
                     QUERY = "UPDATE usuario SET cargo = '" + usuario.getCargo() + "' WHERE id = " + usuario.getId();
                 }
                 case 6 -> {
+                     QUERY = "UPDATE usuario SET cpf = '" + usuario.getCpf() + "' WHERE id = " + usuario.getId();
+                }
+                case 7 -> {
                     QUERY = "UPDATE usuario SET nome = '" + usuario.getNome()
                             + "', email = '" + usuario.getEmail()
                             + "', senha = '" + usuario.getSenha()
                             + "', dataNascimento = '" + usuario.getDataNascimento() 
                             + "', cargo = '" + usuario.getCargo()
+                            + "', status = " + usuario.getStatus()
+                            + ", cpf = '" + usuario.getCpf()
                             + "' WHERE id = " + usuario.getId();
                 } default -> {}
             } 
@@ -159,24 +166,4 @@ public class UsuarioDAO {
             }
         }
     }
-    
-    /*public static void atualizarSenhaUsuario(int id, String senha) {
-        String QUERY = "UPDATE usuario SET senha = '" + criptografia.Criptografar.encriptografar(senha) + "' WHERE id = " + id;
-        Connection connection = null;
-        try {
-            connection = ConexaoDB.createConnectionMySQL();
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(QUERY);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(connection != null) {
-                    connection.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }

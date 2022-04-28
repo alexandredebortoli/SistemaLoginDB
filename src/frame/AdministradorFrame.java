@@ -5,10 +5,10 @@
 package frame;
 
 import controller.AdministradorController;
-import controller.SistemaController;
 import controller.UsuarioController;
 import javax.swing.JOptionPane;
 import model.Administrador;
+import model.Usuario;
 
 /**
  *
@@ -35,7 +35,7 @@ public class AdministradorFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         bFechar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jId = new javax.swing.JTextField();
+        jCpf = new javax.swing.JTextField();
         jSenha = new javax.swing.JPasswordField();
         jBtLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +63,14 @@ public class AdministradorFrame extends javax.swing.JFrame {
         bVerUsuarios = new javax.swing.JButton();
         bVerAdmins = new javax.swing.JButton();
         btCadastrar = new javax.swing.JButton();
+        lStatus = new javax.swing.JLabel();
+        chAtivo = new javax.swing.JCheckBox();
+        chInativo = new javax.swing.JCheckBox();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTxtConfirmarSenha = new javax.swing.JPasswordField();
+        jLabel14 = new javax.swing.JLabel();
+        jTxtCpf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +87,7 @@ public class AdministradorFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel8.setText("Senha:");
 
-        jId.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        jCpf.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
         jSenha.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
@@ -92,7 +100,7 @@ public class AdministradorFrame extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jLabel2.setText("ID:");
+        jLabel2.setText("CPF:");
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel5.setText("Data de nascimento:");
@@ -162,6 +170,22 @@ public class AdministradorFrame extends javax.swing.JFrame {
             }
         });
 
+        lStatus.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        lStatus.setText("Status:");
+
+        chAtivo.setText("Ativo");
+
+        chInativo.setText("Inativo");
+
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel12.setText("Perfil:");
+
+        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        jLabel13.setText("Confirmar Senha:");
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        jLabel14.setText("CPF:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,6 +196,10 @@ public class AdministradorFrame extends javax.swing.JFrame {
                     .addComponent(infoPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bVerUsuarios)
+                                .addGap(18, 18, 18)
+                                .addComponent(bVerAdmins))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +211,8 @@ public class AdministradorFrame extends javax.swing.JFrame {
                                         .addGap(207, 207, 207)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2)
-                                            .addComponent(jId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
+                                            .addComponent(jCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8)
                                             .addGroup(layout.createSequentialGroup()
@@ -195,51 +223,65 @@ public class AdministradorFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cbUsuario)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cbAdmin)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jBtAlterar)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btCadastrar))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel11)
-                                                    .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTxtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addGap(2, 2, 2)
-                                                        .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addGap(1, 1, 1)
-                                                        .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel6)))))))
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(bVerUsuarios)
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(bVerAdmins)))
-                        .addGap(0, 109, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTxtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbUsuario)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbAdmin)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBtAlterar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btCadastrar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jTxtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(lStatus))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chInativo)
+                                            .addComponent(chAtivo))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -263,8 +305,8 @@ public class AdministradorFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,46 +318,60 @@ public class AdministradorFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBtAlterar)
+                            .addComponent(cbUsuario)
+                            .addComponent(cbAdmin)
+                            .addComponent(btCadastrar)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bVerUsuarios)
+                            .addComponent(bVerAdmins)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtAlterar)
-                    .addComponent(cbUsuario)
-                    .addComponent(cbAdmin)
-                    .addComponent(btCadastrar))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bVerUsuarios)
-                    .addComponent(bVerAdmins))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTxtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(lStatus)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chAtivo))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chInativo)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -323,9 +379,7 @@ public class AdministradorFrame extends javax.swing.JFrame {
 
     private void jBtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtLoginActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(jId.getText());
-        String senha = jSenha.getText();
-        admin = AdministradorController.verificarLogin(id, senha);
+        admin = AdministradorController.verificarLogin(jCpf.getText(), jSenha.getText());
         if(admin != null) {
             String status;
             if(admin.getStatus() == 1) {
@@ -333,7 +387,7 @@ public class AdministradorFrame extends javax.swing.JFrame {
             } else {
                 status = "inativo";
             }
-            infoPessoais.setText("ID: "+admin.getId()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
+            infoPessoais.setText("ID: "+admin.getId()+", CPF: "+admin.getCpf()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
                 +admin.getDataNascimento()+", Cargo: "+admin.getCargo()+", Status: "+status);
 
         } else {
@@ -345,28 +399,31 @@ public class AdministradorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(admin != null) {
             if(!jtxtID.getText().equals("")) {
-                if(cbAdmin.isSelected() && !cbUsuario.isSelected()) { //Administrador
-                    AdministradorController.atualizar(Integer.parseInt(jtxtID.getText()), jTxtNome.getText(), jTxtEmail.getText()
-                    , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText());
-                    
-                    JOptionPane.showMessageDialog(this, "Atualizado com sucesso!");
-                    if(Integer.parseInt(jtxtID.getText()) == admin.getId()){
-                        admin = AdministradorController.infoPessoais(admin.getId());
-                        String status;
-                        if(admin.getStatus() == 1) {
-                            status = "ativo";
-                        } else {
-                            status = "inativo";
+                if(cbAdmin.isSelected() && !cbUsuario.isSelected()) { //Administrador  
+                    if(jTxtSenha.getText().equals(jTxtConfirmarSenha.getText())) {
+                        int statusCadastro = 1;
+                        if(!chAtivo.isSelected() && chInativo.isSelected()) {
+                            statusCadastro = 2;
                         }
-                        infoPessoais.setText("ID: "+admin.getId()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
-                        +admin.getDataNascimento()+", Cargo: "+admin.getCargo()+", Status: "+ status);
+                        AdministradorController.atualizar(Integer.parseInt(jtxtID.getText()), jTxtNome.getText(), jTxtEmail.getText()
+                        , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText(), statusCadastro, jTxtCpf.getText());
+
+                        JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "As senhas não são compatíveis!");
                     }
-                 
                 } else if(!cbAdmin.isSelected() && cbUsuario.isSelected()) { //Usuario
-                    UsuarioController.atualizar(Integer.parseInt(jtxtID.getText()), jTxtNome.getText(), jTxtEmail.getText()
-                    , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText());
-                    JOptionPane.showMessageDialog(this, "Atualizado com sucesso!");
-                    
+                    if(jTxtSenha.getText().equals(jTxtConfirmarSenha.getText())) {
+                        int statusCadastro = 1;
+                        if(!chAtivo.isSelected() && chInativo.isSelected()) {
+                            statusCadastro = 2;
+                        }
+                        UsuarioController.atualizar(Integer.parseInt(jtxtID.getText()), jTxtNome.getText(), jTxtEmail.getText()
+                        , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText(), statusCadastro, jTxtCpf.getText());
+                        JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "As senhas não são compatíveis!");
+                    }
                 } else if(!cbAdmin.isSelected() && !cbUsuario.isSelected()) {
                     JOptionPane.showMessageDialog(this, "Selecione um perfil!");
                 } else if(cbAdmin.isSelected() && cbUsuario.isSelected()) {
@@ -375,22 +432,29 @@ public class AdministradorFrame extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "O campo ID é obrigatório!");
             }
+            admin = AdministradorController.infoPessoais(admin.getId());
             String status;
             if(admin.getStatus() == 1) {
                 status = "ativo";
             } else {
                 status = "inativo";
             }
-            infoPessoais.setText("ID: "+admin.getId()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
+            infoPessoais.setText("ID: "+admin.getId()+", CPF: " +admin.getCpf()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
                 +admin.getDataNascimento()+", Cargo: "+admin.getCargo()+", Status: "+status);
         } else {
             JOptionPane.showMessageDialog(this, "Efetue o login antes!");
         }
         jTxtNome.setText("");
+        jTxtCpf.setText("");
         jTxtEmail.setText("");
         jTxtSenha.setText("");
+        jTxtConfirmarSenha.setText("");
         jTxtDataNascimento.setText("dd/mm/aaaa");
         jTxtCargo.setText("");
+        cbAdmin.setSelected(false);
+        cbUsuario.setSelected(false);
+        chInativo.setSelected(false);
+        chAtivo.setSelected(false);
     }//GEN-LAST:event_jBtAlterarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
@@ -419,31 +483,46 @@ public class AdministradorFrame extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
         if(admin != null) {
-            if(jtxtID.getText().equals("") && !jTxtEmail.getText().equals("") && !jTxtNome.getText().equals("")
-                    && !jTxtSenha.getText().equals("") && !jTxtDataNascimento.getText().equals("dd/mm/aaaa")
-                    && !jTxtCargo.getText().equals("")) {
-                if(cbAdmin.isSelected() && !cbUsuario.isSelected()) {
-                    AdministradorController.cadastrar(jTxtNome.getText(), jTxtEmail.getText()
-                    , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText());
-                    
-                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-                    
-                    if(Integer.parseInt(jtxtID.getText()) == admin.getId()){
-                        admin = AdministradorController.infoPessoais(admin.getId());
-                        String status;
-                        if(admin.getStatus() == 1) {
-                            status = "ativo";
+            if(jtxtID.getText().equals("") && !jTxtCpf.getText().equals("") && !jTxtEmail.getText().equals("") && !jTxtNome.getText().equals("")
+                    && !jTxtSenha.getText().equals("") && !jTxtConfirmarSenha.getText().equals("") 
+                    && !jTxtDataNascimento.getText().equals("dd/mm/aaaa") && !jTxtCargo.getText().equals("") 
+                    && (!chAtivo.isSelected() || !chInativo.isSelected())) {
+                if(cbAdmin.isSelected() && !cbUsuario.isSelected()) { //Admin
+                    Administrador novoAdmin = AdministradorController.verificarCpf(jTxtCpf.getText());
+                    if(novoAdmin == null) {
+                        if(jTxtSenha.getText().equals(jTxtConfirmarSenha.getText())) {
+                            int statusCadastro = 1;
+                            if(!chAtivo.isSelected() && chInativo.isSelected()) {
+                                statusCadastro = 2;
+                            }
+                            AdministradorController.cadastrar(jTxtNome.getText(), jTxtEmail.getText()
+                            , jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText(), statusCadastro, jTxtCpf.getText());
+                            
+                            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
                         } else {
-                            status = "inativo";
+                        JOptionPane.showMessageDialog(this, "As senhas não são compatíveis!");
                         }
-                        infoPessoais.setText("ID: "+admin.getId()+", Nome: "+admin.getNome()+", Email: "+admin.getEmail()+", Data de Nascimento: "
-                        +admin.getDataNascimento()+", Cargo: "+admin.getCargo()+", Status: "+ status);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CPF já cadastrado!");
                     }
-                } else if(!cbAdmin.isSelected() && cbUsuario.isSelected()) {
-                    UsuarioController.cadastrar(jTxtNome.getText(), jTxtEmail.getText(), 
-                            jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText());
-                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-                    
+                } else if(!cbAdmin.isSelected() && cbUsuario.isSelected()) { //Usuario
+                    Usuario novoUsuario = UsuarioController.verificarCpf(jTxtCpf.getText());
+                    if(novoUsuario == null) {
+                        if(jTxtSenha.getText().equals(jTxtConfirmarSenha.getText())) {
+                            int statusCadastro = 1;
+                            if(!chAtivo.isSelected() && chInativo.isSelected()) {
+                                statusCadastro = 2;
+                            }
+                            UsuarioController.cadastrar(jTxtNome.getText(), jTxtEmail.getText(), 
+                                    jTxtSenha.getText(), jTxtDataNascimento.getText(), jTxtCargo.getText(), statusCadastro, jTxtCpf.getText());
+                            
+                            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "As senhas não são compatíveis!");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CPF já cadastrado!");
+                    }
                 } else if(!cbAdmin.isSelected() && !cbUsuario.isSelected()) {
                     JOptionPane.showMessageDialog(this, "Selecione um perfil!");
                 } else if(cbAdmin.isSelected() && cbUsuario.isSelected()) {
@@ -458,8 +537,14 @@ public class AdministradorFrame extends javax.swing.JFrame {
         jTxtNome.setText("");
         jTxtEmail.setText("");
         jTxtSenha.setText("");
+        jTxtCpf.setText("");
+        jTxtConfirmarSenha.setText("");
         jTxtDataNascimento.setText("dd/mm/aaaa");
         jTxtCargo.setText("");
+        cbAdmin.setSelected(false);
+        cbUsuario.setSelected(false);
+        chInativo.setSelected(false);
+        chAtivo.setSelected(false);
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     /**
@@ -505,13 +590,18 @@ public class AdministradorFrame extends javax.swing.JFrame {
     private javax.swing.JButton btCadastrar;
     private javax.swing.JCheckBox cbAdmin;
     private javax.swing.JCheckBox cbUsuario;
+    private javax.swing.JCheckBox chAtivo;
+    private javax.swing.JCheckBox chInativo;
     private javax.swing.JLabel infoPessoais;
     private javax.swing.JButton jBtAlterar;
     private javax.swing.JButton jBtLogin;
-    private javax.swing.JTextField jId;
+    private javax.swing.JTextField jCpf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -525,10 +615,13 @@ public class AdministradorFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTxtCargo;
+    private javax.swing.JPasswordField jTxtConfirmarSenha;
+    private javax.swing.JTextField jTxtCpf;
     private javax.swing.JTextField jTxtDataNascimento;
     private javax.swing.JTextField jTxtEmail;
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JPasswordField jTxtSenha;
     private javax.swing.JTextField jtxtID;
+    private javax.swing.JLabel lStatus;
     // End of variables declaration//GEN-END:variables
 }

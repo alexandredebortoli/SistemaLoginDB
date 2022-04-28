@@ -32,7 +32,7 @@ public class TableUsuarios extends javax.swing.JFrame {
                 status = "inativo";
             }
             dtmUsuarios.addRow(new String[]{Integer.toString(usuarios.get(i).getId()), usuarios.get(i).getNome(), usuarios.get(i).getEmail(),
-               usuarios.get(i).getDataNascimento(), usuarios.get(i).getCargo(), status});
+               usuarios.get(i).getDataNascimento(), usuarios.get(i).getCargo(), status, usuarios.get(i).getCpf()});
         }
         
     }
@@ -65,11 +65,11 @@ public class TableUsuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Email", "Data de Nascimento", "Cargo", "Status"
+                "ID", "Nome", "Email", "Data de Nascimento", "Cargo", "Status", "CPF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

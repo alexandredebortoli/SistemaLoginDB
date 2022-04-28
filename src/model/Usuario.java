@@ -9,16 +9,18 @@ public class Usuario {
     private String dataNascimento;
     private String cargo;
     private int status = 1;
+    private String cpf;
     
     public Usuario() {}
 
-    public Usuario(int id, String nome, String email, String senha, String dataNascimento, String cargo) {
+    public Usuario(int id, String nome, String email, String senha, String dataNascimento, String cargo, String cpf) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.dataNascimento = dataNascimento;
         this.cargo = cargo;
+        this.cpf = cpf;
     }  
 
     public int getId() {
@@ -76,6 +78,12 @@ public class Usuario {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 }

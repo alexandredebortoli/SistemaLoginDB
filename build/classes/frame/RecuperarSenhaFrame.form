@@ -45,7 +45,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="bRecuperarSenha" min="-2" max="-2" attributes="0"/>
-                          <Component id="tId" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="tCpf" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -68,7 +68,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tCpf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bRecuperarSenha" min="-2" max="-2" attributes="0"/>
@@ -91,10 +91,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="ID:"/>
+        <Property name="text" type="java.lang.String" value="CPF:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tId">
+    <Component class="javax.swing.JTextField" name="tCpf">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>

@@ -30,7 +30,7 @@ public class TableAdministradores extends javax.swing.JFrame {
                 status = "inativo";
             }
             dtmAdmins.addRow(new String[]{Integer.toString(admins.get(i).getId()), admins.get(i).getNome(), admins.get(i).getEmail(),
-               admins.get(i).getDataNascimento(), admins.get(i).getCargo(), status});
+               admins.get(i).getDataNascimento(), admins.get(i).getCargo(), status, admins.get(i).getCpf()});
         }
     }
 
@@ -62,11 +62,11 @@ public class TableAdministradores extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Email", "Data de Nascimento", "Cargo", "Status"
+                "ID", "Nome", "Email", "Data de Nascimento", "Cargo", "Status", "CPF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -74,6 +74,10 @@ public class TableAdministradores extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableAdministradores);
+        if (tableAdministradores.getColumnModel().getColumnCount() > 0) {
+            tableAdministradores.getColumnModel().getColumn(0).setPreferredWidth(2);
+            tableAdministradores.getColumnModel().getColumn(5).setPreferredWidth(4);
+        }
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Todos os Administradores");
