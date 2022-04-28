@@ -17,8 +17,8 @@ public class JavaMailDAO {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         
-        String myAccount = "xande10.floripa@gmail.com";
-        String myPass = "@lex0102";
+        String myAccount = ""; // Seu Email
+        String myPass = ""; // Sua Senha
         
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
