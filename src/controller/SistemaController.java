@@ -12,6 +12,7 @@ public class SistemaController {
     public static void iniciar() throws SQLException {
         Connection connection = ConexaoDB.createConnectionMySQL();
         if(connection != null) {
+            System.out.println("Hello, alexandre");
             System.out.println("Conexão realizada com sucesso!");
             connection.close();
         }
